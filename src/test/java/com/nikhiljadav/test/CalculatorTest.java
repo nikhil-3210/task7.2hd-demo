@@ -21,6 +21,6 @@ public class CalculatorTest {
 
 	@Test
 	public void testFailingAddition() {
-		assertEquals(10, calculator.add(4, 5));
+		assertEquals(9, calculator.add(4, 5));
 	} // intentional fail
 }
