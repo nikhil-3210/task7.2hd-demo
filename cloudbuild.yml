@@ -1,0 +1,20 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+steps:
+  - name: 'gcr.io/cloud-builders/mvn'
+    args: ['clean', 'test']
+    id: 'Run Unit Tests'
+
+  - name: 'gcr.io/cloud-builders/mvn'
+    args: ['clean', 'package']
+    id: 'Build Java App'
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['app', 'deploy', '--quiet']
+    id: 'Deploy to App Engine'
+
+artifacts:
+  objects:
+    location: 'gs://javacidc-artifacts/builds/'
+    paths: ['target/*.jar']
